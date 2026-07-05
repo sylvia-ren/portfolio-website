@@ -46,6 +46,7 @@ export function Plate({
         height={height}
         sizes={scaleSizes[plate.scale]}
         priority={eager}
+        fetchPriority={eager ? "high" : undefined}
         className="h-auto w-full"
       />
       {plate.caption ? (

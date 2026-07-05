@@ -9,13 +9,14 @@
   /* material: paper rooms */
   --paper: #f6f4ef;
   --ink: #1a1917;
-  --ink-soft: rgb(26 25 23 / 0.55);
+  /* quiet, but never below AA contrast — 0.66 keeps 4.5:1 on paper at label size */
+  --ink-soft: rgb(26 25 23 / 0.66);
   --hairline-ink: rgb(26 25 23 / 0.16);
 
   /* material: dark rooms (the threshold, the photographs) */
   --night: #141311;
   --chalk: #e9e6df;
-  --chalk-soft: rgb(233 230 223 / 0.55);
+  --chalk-soft: rgb(233 230 223 / 0.62);
   --hairline-chalk: rgb(233 230 223 / 0.18);
 
   /* the room sets these; components only ever use --bg / --fg */
