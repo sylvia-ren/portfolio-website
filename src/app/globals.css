@@ -85,6 +85,19 @@
     color: var(--fg);
   }
 
+  .page-dissolve {
+    animation: dissolve-in var(--duration-dissolve) var(--ease-water) both;
+  }
+
+  @keyframes dissolve-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
   .skip-link {
     position: fixed;
     top: var(--space-text);
