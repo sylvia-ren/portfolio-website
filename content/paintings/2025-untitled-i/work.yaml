@@ -1,0 +1,8 @@
+# working title — rename freely; add `medium:` and `dimensions:` when known.
+title: Untitled I
+year: 2025
+plates:
+  - src: 01.jpg
+    alt: pale blue and green currents circling a softly luminous figure at the center of the canvas
+    scale: page
+    rest: silence

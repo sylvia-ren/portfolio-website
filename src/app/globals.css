@@ -1,0 +1,126 @@
+@import "tailwindcss";
+@import "../styles/tokens.css";
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-night: var(--night);
+  --color-chalk: var(--chalk);
+  --font-sans: var(--font-satoshi), ui-sans-serif, system-ui, sans-serif;
+  --ease-water: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* even the selection is ink */
+  ::selection {
+    background: var(--fg);
+    color: var(--bg);
+  }
+
+  :focus-visible {
+    outline: 1px solid var(--fg);
+    outline-offset: 4px;
+  }
+}
+
+@layer components {
+  /* the four voices of the exhibition */
+
+  .text-display {
+    font-size: var(--text-display);
+    font-weight: 300;
+    letter-spacing: var(--tracking-display);
+    line-height: var(--leading-display);
+    text-transform: lowercase;
+  }
+
+  .text-title {
+    font-size: var(--text-title);
+    font-weight: 400;
+    letter-spacing: var(--tracking-title);
+    line-height: var(--leading-title);
+    text-transform: lowercase;
+  }
+
+  .text-body {
+    font-size: var(--text-body);
+    font-weight: 400;
+    line-height: var(--leading-body);
+  }
+
+  .text-label {
+    font-size: var(--text-label);
+    font-weight: 400;
+    letter-spacing: var(--tracking-label);
+    line-height: 1.6;
+    text-transform: lowercase;
+  }
+
+  .wall-text {
+    max-width: var(--measure-prose);
+    font-size: var(--text-body);
+    font-weight: 400;
+    line-height: var(--leading-body);
+  }
+
+  .ink-soft {
+    color: var(--fg-soft);
+  }
+
+  /* links are typography, nothing else; affordance comes from tone */
+  .quiet-link {
+    color: var(--fg-soft);
+    transition: color 200ms var(--ease-water);
+  }
+
+  .quiet-link:hover,
+  .quiet-link[aria-current="page"] {
+    color: var(--fg);
+  }
+
+  .page-dissolve {
+    animation: dissolve-in var(--duration-dissolve) var(--ease-water) both;
+  }
+
+  @keyframes dissolve-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .skip-link {
+    position: fixed;
+    top: var(--space-text);
+    left: var(--space-text);
+    z-index: 100;
+    padding: var(--space-label) var(--space-text);
+    background: var(--paper);
+    color: var(--ink);
+    clip-path: inset(50%);
+  }
+
+  .skip-link:focus-visible {
+    clip-path: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
