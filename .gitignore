@@ -42,3 +42,6 @@ next-env.d.ts
 
 # generated media mirror
 /public/media
+
+# os noise
+.DS_Store
