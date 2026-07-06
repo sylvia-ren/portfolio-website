@@ -11,8 +11,13 @@ export const plateScales = ["intimate", "page", "full"] as const;
 /** the exhalation after a plate: nothing, a breath, or a long silence */
 export const plateRests = ["none", "breath", "silence"] as const;
 
+const plateImagePattern = /\.(jpe?g|png|webp|avif|gif)$/i;
+
 export const plateSchema = z.object({
-  src: z.string().min(1, "a plate needs an image file"),
+  src: z
+    .string()
+    .min(1, "a plate needs an image file")
+    .regex(plateImagePattern, "plate src must be an image file: jpg, png, webp, avif, or gif"),
   alt: z.string().min(1, "every plate needs alt text — accessibility is not optional"),
   caption: z.string().optional(),
   scale: z.enum(plateScales).default("page"),

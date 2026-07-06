@@ -8,6 +8,7 @@
     "dev": "next dev",
     "prebuild": "npm run media",
     "build": "next build",
+    "prestart": "npm run media",
     "start": "next start",
     "lint": "eslint"
   },
@@ -29,5 +30,8 @@
     "eslint-config-next": "16.2.10",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "overrides": {
+    "postcss": "8.5.16"
   }
 }

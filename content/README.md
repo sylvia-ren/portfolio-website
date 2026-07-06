@@ -11,7 +11,8 @@ write with true casing; the site lowercases everything visually.
 ## works — `paintings/`, `sketchbooks/`, `photographs/`
 
 one folder per work. the folder name is the url slug (use `year-title` so
-ordering stays deliberate). inside: a `work.yaml` and the image files.
+ordering stays deliberate). inside: a `work.yaml` and the image files (`jpg`,
+`png`, `webp`, `avif` or `gif`).
 
 ```
 paintings/
