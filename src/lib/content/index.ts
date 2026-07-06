@@ -46,12 +46,14 @@ export function getWorks(room: WorkRoom): Work[] {
   const works = fs
     .readdirSync(roomDir, { withFileTypes: true })
     .filter((entry) => entry.isDirectory())
-    .flatMap((entry) => {
+    .map((entry) => {
       const file = path.join(roomDir, entry.name, "work.yaml");
-      if (!fs.existsSync(file)) return [];
+      if (!fs.existsSync(file)) {
+        fail(`content/${room}/${entry.name}`, "missing work.yaml");
+      }
       try {
         const parsed = workSchema.parse(parseYaml(fs.readFileSync(file, "utf8")));
-        return [{ ...parsed, slug: entry.name, room }];
+        return { ...parsed, slug: entry.name, room };
       } catch (error) {
         fail(`content/${room}/${entry.name}/work.yaml`, error);
       }
@@ -72,10 +74,10 @@ export function getWritings(): Writing[] {
 
   const writings = fs
     .readdirSync(dir)
-    .filter((name) => /\.mdx?$/.test(name))
+    .filter((name) => /\.md$/.test(name))
     .map((name) => {
       const raw = fs.readFileSync(path.join(dir, name), "utf8");
-      const slug = name.replace(/\.mdx?$/, "");
+      const slug = name.replace(/\.md$/, "");
       try {
         const { data, content } = matter(raw);
         const parsed = writingSchema.parse(data);

@@ -7,7 +7,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 const ROOMS = ["paintings", "sketchbooks", "photographs"];
-const MEDIA = /\.(jpe?g|png|webp|avif|gif|mp4|webm)$/i;
+const MEDIA = /\.(jpe?g|png|webp|avif|gif)$/i;
 
 const contentDir = path.resolve("content");
 const mediaDir = path.resolve("public/media");
