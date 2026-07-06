@@ -1,16 +1,8 @@
 # a digital exhibition
 
-not a portfolio — a quiet exhibition space for paintings, sketchbooks,
-writings and photographs. the conceptual thread is diffusion: a single
-gesture whose consequences propagate softly and then settle.
+a quiet exhibition space for paintings, sketchbooks,
+writings and photographs.
 
-## principles
-
-- the artwork is always the protagonist; the interface almost disappears
-- stillness is the default state; motion happens only when the visitor causes it
-- ink and paper are the entire palette; images provide all other color
-- space is the curator: rhythm outranks layout
-- the site must be complete, accessible and beautiful with all enhancement off
 
 ## editing content
 
