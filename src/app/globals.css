@@ -149,14 +149,17 @@
     }
   }
 
-  /* sketchbook — a pile of pages on the desk, A5 landscape */
+  /* sketchbook — a pile of pages on the desk, A5 landscape spread */
   .sketchbook {
-    width: min(52rem, 100%);
+    width: min(72rem, 100%);
   }
 
   .sketchbook-stage {
     position: relative;
+    width: 100%;
     aspect-ratio: 210 / 148;
+    max-height: min(48vh, 28rem);
+    margin-inline: auto;
     cursor: pointer;
     perspective: 1400px;
     user-select: none;
@@ -271,41 +274,133 @@
     transform: translateY(0);
   }
 
+  @media (hover: hover) and (pointer: fine) {
+    .nav-dropdown-menu {
+      pointer-events: none;
+    }
+
+    .nav-dropdown:hover .nav-dropdown-menu {
+      pointer-events: auto;
+    }
+  }
+
   .nav-dropdown-item {
     display: block;
     padding: var(--space-hair) 0;
     white-space: nowrap;
   }
 
-  /* room rail — works aligned left to right, scrolled in motion */
-  .work-rail {
+  /* paintings — continuous drift across the wall */
+  .paintings-marquee {
+    overflow: hidden;
     width: 100%;
+    padding-bottom: var(--space-section);
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 8%,
+      black 92%,
+      transparent
+    );
   }
 
-  .work-rail-track {
+  .paintings-marquee-track {
     display: flex;
+    width: max-content;
     gap: var(--space-block);
-    overflow-x: auto;
-    padding-bottom: var(--space-text);
-    scroll-behavior: smooth;
-    scroll-snap-type: x proximity;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
-    scrollbar-color: var(--line) transparent;
+    animation: paintings-marquee 48s linear infinite;
   }
 
-  .work-rail-track::-webkit-scrollbar {
-    height: 1px;
+  .paintings-marquee:hover .paintings-marquee-track {
+    animation-play-state: paused;
   }
 
-  .work-rail-track::-webkit-scrollbar-thumb {
-    background: var(--line);
+  @keyframes paintings-marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
   }
 
-  .work-rail-item {
+  .paintings-marquee-item {
     flex: 0 0 auto;
-    width: min(22rem, 72vw);
-    scroll-snap-align: start;
+  }
+
+  .paintings-marquee-frame {
+    position: relative;
+    display: block;
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .paintings-marquee-image {
+    display: block;
+    height: min(36vh, 22rem);
+    width: auto;
+    max-width: min(16rem, 36vw);
+    object-fit: contain;
+  }
+
+  .paintings-marquee-label {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: calc(-1 * var(--space-block));
+    text-align: center;
+    color: var(--fg-soft);
+    opacity: 0;
+    transform: translateY(4px);
+    transition:
+      opacity 220ms var(--ease-water),
+      transform 220ms var(--ease-water),
+      color 220ms var(--ease-water);
+    pointer-events: none;
+  }
+
+  .paintings-marquee-frame:hover .paintings-marquee-label,
+  .paintings-marquee-frame:focus-visible .paintings-marquee-label {
+    opacity: 1;
+    transform: translateY(0);
+    color: var(--fg);
+  }
+
+  /* sketchbook room — years whispered on hover, no previews */
+  .sketchbook-years {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-text);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .sketchbook-years-link {
+    display: inline-block;
+    min-width: 4rem;
+    min-height: 1.5rem;
+  }
+
+  .sketchbook-years-label {
+    opacity: 0;
+    transition: opacity 220ms var(--ease-water);
+  }
+
+  .sketchbook-years-link:hover .sketchbook-years-label,
+  .sketchbook-years-link:focus-visible .sketchbook-years-label {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .paintings-marquee-track {
+      animation: none;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+    }
   }
 
   .skip-link {

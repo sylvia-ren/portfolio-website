@@ -14,7 +14,7 @@ export function GallerySequence({ work }: { work: Work }) {
   }
 
   return (
-    <div className="flex flex-col items-start">
+    <div className="flex flex-col items-center">
       {work.plates.map((plate, index) => (
         <Plate
           key={plate.src}
@@ -37,7 +37,7 @@ function SketchbookGallery({ work }: { work: Work }) {
   }));
 
   return (
-    <div className="reveal-in" style={{ animationDelay: "120ms" }}>
+    <div className="flex justify-center reveal-in" style={{ animationDelay: "120ms" }}>
       <SketchbookStack plates={plates} />
     </div>
   );

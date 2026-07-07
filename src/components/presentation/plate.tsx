@@ -62,9 +62,10 @@ export function Plate({
           width={width}
           height={height}
           sizes={sizes ?? scaleSizes[plate.scale]}
-          priority={eager}
-          fetchPriority={eager ? "high" : undefined}
-          className="h-auto w-full"
+        priority={eager}
+        fetchPriority={eager ? "high" : undefined}
+        quality={75}
+        className="h-auto w-full"
         />
       </div>
       {plate.caption ? (
