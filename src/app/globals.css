@@ -326,20 +326,27 @@
   .paintings-marquee-track {
     display: flex;
     width: max-content;
-    gap: var(--space-block);
     animation: paintings-marquee 48s linear infinite;
+    will-change: transform;
   }
 
   .paintings-marquee:hover .paintings-marquee-track {
     animation-play-state: paused;
   }
 
+  .paintings-marquee-group {
+    display: flex;
+    flex: 0 0 auto;
+    gap: var(--space-block);
+    padding-right: var(--space-block);
+  }
+
   @keyframes paintings-marquee {
     from {
-      transform: translateX(0);
+      transform: translate3d(0, 0, 0);
     }
     to {
-      transform: translateX(-50%);
+      transform: translate3d(var(--paintings-marquee-shift, -12.5%), 0, 0);
     }
   }
 
