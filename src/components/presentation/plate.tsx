@@ -30,21 +30,29 @@ export function Plate({
   work,
   plate,
   eager = false,
+  figureClassName,
+  sizes,
 }: {
   work: Work;
   plate: PlateData;
   eager?: boolean;
+  figureClassName?: string;
+  sizes?: string;
 }) {
   const { width, height } = plateDimensions(work, plate.src);
 
   return (
-    <figure className={`${scaleClass[plate.scale]} ${restClass[plate.rest]} last:mb-0`}>
+    <figure
+      className={
+        figureClassName ?? `${scaleClass[plate.scale]} ${restClass[plate.rest]} last:mb-0`
+      }
+    >
       <Image
         src={plateSrc(work, plate.src)}
         alt={plate.alt}
         width={width}
         height={height}
-        sizes={scaleSizes[plate.scale]}
+        sizes={sizes ?? scaleSizes[plate.scale]}
         priority={eager}
         fetchPriority={eager ? "high" : undefined}
         className="h-auto w-full"
