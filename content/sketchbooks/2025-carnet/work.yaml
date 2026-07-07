@@ -5,19 +5,20 @@ note: >
   it wanted, and sentences written in the margins.
 plates:
   - src: 01.jpg
-    alt: watercolor spread — a small figure at the heart of a grey-blue whirlpool, with a handwritten poem on the facing page
-    scale: full
-    rest: silence
-  - src: 02.jpg
-    alt: three dark ink pools blooming on white paper, their centers hollowed like fruit
-    scale: intimate
-    rest: breath
-  - src: 03.jpg
-    alt: faint traces of grey ink diffusing into the page, barely there
-    scale: intimate
-    rest: silence
-  - src: 04.jpg
-    alt: an herbarium spread — pressed moss, lichen and fern above a row of watercolor circles and autumn leaves
+    alt: herbarium spread — pressed moss, lichen and fern, a row of watercolor circles, autumn leaves
     scale: page
     rest: breath
-  
+  - src: 02.jpg
+    alt: sketchbook spread — colored pencil studies, pressed seed heads, earth-toned marks across both pages
+    scale: full
+    rest: silence
+  - src: 03.jpg
+    alt: watercolor whirlpool with a small figure at the center, facing a handwritten poem
+    caption: "« ses larmes me pénètrent »"
+    scale: full
+    rest: silence
+  - src: 04.jpg
+    alt: collage of newspaper and cut-out letters around painted melon halves and a slice
+    caption: "« le temps était ce jus de melon coulant entre nos doigts »"
+    scale: full
+    rest: none

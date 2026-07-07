@@ -34,23 +34,22 @@ export function WorkRoomIndex({ room }: { room: WorkRoom }) {
                 key={work.slug}
                 className="mb-[var(--space-plate)] w-[min(44rem,100%)] last:mb-0"
               >
-                <Link href={`/${room}/${work.slug}`} className="block">
-                  <div
-                    className="plate-lift plate-reveal"
-                    style={{ animationDelay: `${120 + index * 90}ms` }}
-                  >
-                    <Image
-                      src={plateSrc(work, plate.src)}
-                      alt={plate.alt}
-                      width={width}
-                      height={height}
-                      sizes="(max-width: 768px) 88vw, 704px"
-                      quality={60}
-                      priority={index === 0}
-                      fetchPriority={index === 0 ? "high" : undefined}
-                      className="h-auto w-full"
-                    />
-                  </div>
+                <Link
+                  href={`/${room}/${work.slug}`}
+                  className="plate-lift plate-reveal block"
+                  style={{ animationDelay: `${120 + index * 90}ms` }}
+                >
+                  <Image
+                    src={plateSrc(work, plate.src)}
+                    alt={plate.alt}
+                    width={width}
+                    height={height}
+                    sizes="(max-width: 768px) 88vw, 704px"
+                    quality={60}
+                    priority={index === 0}
+                    fetchPriority={index === 0 ? "high" : undefined}
+                    className="h-auto w-full"
+                  />
                 </Link>
                 <figcaption className="mt-[var(--space-label)]">
                   <Link
