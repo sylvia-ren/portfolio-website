@@ -2,10 +2,21 @@ title: Carnet
 year: 2024
 order: 2
 note: >
-  a new sketchbook — add pages by placing images in this folder and listing
-  them below, one entry per spread.
+
 plates:
   - src: 01.jpg
-    alt: first page — replace this image and update the alt text
     scale: page
     rest: none
+
+  - src: 02.jpg
+    scale: page
+    rest: none
+
+  - src: 03.jpg
+    scale: page
+    rest: none
+
+  - src: 04.jpg
+    scale: page
+    rest: none
+  
