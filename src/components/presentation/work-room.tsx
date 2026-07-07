@@ -35,17 +35,22 @@ export function WorkRoomIndex({ room }: { room: WorkRoom }) {
                 className="mb-[var(--space-plate)] w-[min(44rem,100%)] last:mb-0"
               >
                 <Link href={`/${room}/${work.slug}`} className="block">
-                  <Image
-                    src={plateSrc(work, plate.src)}
-                    alt={plate.alt}
-                    width={width}
-                    height={height}
-                    sizes="(max-width: 768px) 88vw, 704px"
-                    quality={60}
-                    priority={index === 0}
-                    fetchPriority={index === 0 ? "high" : undefined}
-                    className="h-auto w-full"
-                  />
+                  <div
+                    className="plate-lift plate-reveal"
+                    style={{ animationDelay: `${120 + index * 90}ms` }}
+                  >
+                    <Image
+                      src={plateSrc(work, plate.src)}
+                      alt={plate.alt}
+                      width={width}
+                      height={height}
+                      sizes="(max-width: 768px) 88vw, 704px"
+                      quality={60}
+                      priority={index === 0}
+                      fetchPriority={index === 0 ? "high" : undefined}
+                      className="h-auto w-full"
+                    />
+                  </div>
                 </Link>
                 <figcaption className="mt-[var(--space-label)]">
                   <Link
@@ -77,11 +82,17 @@ export function WorkCataloguePage({
 
   return (
     <article className="px-[var(--margin-page)] pb-[var(--space-section)]">
-      <div className="mt-[var(--space-section)] mb-[var(--space-section)]">
+      <div
+        className="mt-[var(--space-section)] mb-[var(--space-section)] reveal-in"
+        style={{ animationDelay: "80ms" }}
+      >
         <WorkLabel work={work} />
       </div>
       <GallerySequence work={work} />
-      <p className="mt-[var(--space-rest)]">
+      <p
+        className="mt-[var(--space-rest)] reveal-in"
+        style={{ animationDelay: `${120 + work.plates.length * 90 + 120}ms` }}
+      >
         <Link href={`/${room}`} className="text-label quiet-link">
           {room}
         </Link>

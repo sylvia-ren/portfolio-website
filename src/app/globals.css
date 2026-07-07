@@ -92,10 +92,144 @@
   @keyframes dissolve-in {
     from {
       opacity: 0;
+      transform: translateY(10px);
     }
     to {
       opacity: 1;
+      transform: translateY(0);
     }
+  }
+
+  /* soft entrance for type and plates within a dissolving page */
+  .reveal-in {
+    animation: reveal-in var(--duration-reveal) var(--ease-water) both;
+  }
+
+  @keyframes reveal-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .plate-reveal {
+    animation: reveal-in var(--duration-reveal) var(--ease-water) both;
+  }
+
+  /* a quiet lift on hover — the same ease as the water on display type */
+  .plate-lift {
+    display: block;
+    will-change: transform;
+    transition:
+      transform var(--duration-float) var(--ease-water),
+      filter var(--duration-float) var(--ease-water);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .plate-lift:hover {
+      transform: translateY(-5px);
+      filter: drop-shadow(0 10px 20px rgb(26 25 23 / 0.1));
+    }
+
+    [data-room="dark"] .plate-lift:hover {
+      filter: drop-shadow(0 10px 24px rgb(0 0 0 / 0.35));
+    }
+  }
+
+  /* sketchbook — a pile of pages on the desk */
+  .sketchbook {
+    width: min(44rem, 100%);
+  }
+
+  .sketchbook-stage {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    cursor: pointer;
+    perspective: 1400px;
+    user-select: none;
+  }
+
+  .sketchbook-sheet {
+    position: absolute;
+    inset: 0;
+    border-radius: 1px;
+    background: var(--paper);
+    box-shadow:
+      0 1px 2px rgb(26 25 23 / 0.06),
+      0 6px 18px rgb(26 25 23 / 0.08);
+    transform-origin: left center;
+    overflow: hidden;
+  }
+
+  .sketchbook-sheet--under-2 {
+    transform: rotate(-1.2deg) translate(6px, 10px) scale(0.97);
+    z-index: 1;
+    opacity: 0.55;
+  }
+
+  .sketchbook-sheet--under-1 {
+    transform: rotate(0.7deg) translate(3px, 5px) scale(0.985);
+    z-index: 2;
+    opacity: 0.78;
+  }
+
+  .sketchbook-sheet--active {
+    z-index: 3;
+    transition:
+      transform var(--duration-page-turn) var(--ease-water),
+      opacity calc(var(--duration-page-turn) * 0.85) var(--ease-water);
+  }
+
+  .sketchbook-sheet--turn-next {
+    transform: rotateY(-14deg) translateX(-6%) translateY(-2px);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .sketchbook-sheet--turn-prev {
+    animation: sketchbook-return var(--duration-page-turn) var(--ease-water) both;
+  }
+
+  @keyframes sketchbook-return {
+    from {
+      opacity: 0;
+      transform: rotateY(10deg) translateX(4%);
+    }
+    to {
+      opacity: 1;
+      transform: rotateY(0) translateX(0);
+    }
+  }
+
+  .sketchbook-page {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: clamp(0.75rem, 2.5vw, 1.25rem);
+  }
+
+  .sketchbook-page img {
+    object-fit: contain;
+  }
+
+  .sketchbook-meta {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-text);
+    margin-top: var(--space-block);
+  }
+
+  .sketchbook-hint {
+    color: var(--fg-soft);
+    font-size: var(--text-label);
+    letter-spacing: var(--tracking-label);
+    line-height: 1.6;
+    text-transform: lowercase;
   }
 
   .skip-link {

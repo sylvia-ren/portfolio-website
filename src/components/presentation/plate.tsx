@@ -4,8 +4,9 @@ import type { Plate as PlateData, Work } from "@/lib/content/schema";
 
 /*
  * a plate is an image with its silence: the full image, never cropped,
- * never rounded, never moving, its exact space reserved before it loads.
+ * never rounded, its exact space reserved before it loads.
  * `scale` decides how much wall it is given; `rest` the pause that follows.
+ * entrance is a dissolve; hover is a quiet lift — stillness between.
  */
 
 const scaleClass: Record<PlateData["scale"], string> = {
@@ -32,12 +33,16 @@ export function Plate({
   eager = false,
   figureClassName,
   sizes,
+  revealDelay,
+  interactive = true,
 }: {
   work: Work;
   plate: PlateData;
   eager?: boolean;
   figureClassName?: string;
   sizes?: string;
+  revealDelay?: number;
+  interactive?: boolean;
 }) {
   const { width, height } = plateDimensions(work, plate.src);
 
@@ -47,16 +52,21 @@ export function Plate({
         figureClassName ?? `${scaleClass[plate.scale]} ${restClass[plate.rest]} last:mb-0`
       }
     >
-      <Image
-        src={plateSrc(work, plate.src)}
-        alt={plate.alt}
-        width={width}
-        height={height}
-        sizes={sizes ?? scaleSizes[plate.scale]}
-        priority={eager}
-        fetchPriority={eager ? "high" : undefined}
-        className="h-auto w-full"
-      />
+      <div
+        className={interactive ? "plate-lift plate-reveal" : "plate-reveal"}
+        style={revealDelay ? { animationDelay: `${revealDelay}ms` } : undefined}
+      >
+        <Image
+          src={plateSrc(work, plate.src)}
+          alt={plate.alt}
+          width={width}
+          height={height}
+          sizes={sizes ?? scaleSizes[plate.scale]}
+          priority={eager}
+          fetchPriority={eager ? "high" : undefined}
+          className="h-auto w-full"
+        />
+      </div>
       {plate.caption ? (
         <figcaption className="text-label ink-soft mt-[var(--space-label)]">
           {plate.caption}
