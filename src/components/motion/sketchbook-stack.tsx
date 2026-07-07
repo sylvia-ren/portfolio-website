@@ -11,16 +11,20 @@ export type SketchbookPlate = {
   caption?: string;
 };
 
+const PAPER_MARGIN = 1.06;
+
 /*
  * a sketchbook on the desk: pages stacked beneath, one spread at a time.
- * click the right half to turn forward, the left to go back — like leafing
- * through paper. every page fits the same sheet so the pile stays honest.
+ * the fictive sheet sizes itself to each page — portrait for tall drawings,
+ * landscape spreads kept tight so the paper does not overshoot the image.
  */
 export function SketchbookStack({ plates }: { plates: SketchbookPlate[] }) {
   const [index, setIndex] = useState(0);
   const [turn, setTurn] = useState<"next" | "prev" | null>(null);
   const busy = useRef(false);
   const plate = plates[index];
+  const isPortrait = plate.height > plate.width;
+  const aspectRatio = `${plate.width * PAPER_MARGIN} / ${plate.height * PAPER_MARGIN}`;
 
   const turnPage = useCallback(
     (direction: "next" | "prev") => {
@@ -86,9 +90,10 @@ export function SketchbookStack({ plates }: { plates: SketchbookPlate[] }) {
         : "";
 
   return (
-    <div className="sketchbook">
+    <div className={`sketchbook ${isPortrait ? "sketchbook--portrait" : "sketchbook--landscape"}`}>
       <div
         className="sketchbook-stage"
+        style={{ aspectRatio }}
         onClick={handleClick}
         role="group"
         aria-label={`carnet, page ${index + 1} sur ${plates.length}`}
@@ -106,7 +111,8 @@ export function SketchbookStack({ plates }: { plates: SketchbookPlate[] }) {
               alt={plate.alt}
               width={plate.width}
               height={plate.height}
-              sizes="(max-width: 768px) 88vw, 704px"
+              sizes={isPortrait ? "(max-width: 768px) 84vw, 352px" : "(max-width: 768px) 92vw, 640px"}
+              quality={75}
               priority={index === 0}
               className="h-full w-full"
             />
