@@ -26,9 +26,9 @@ type MarqueeTrackStyle = CSSProperties & {
 export function PaintingsMarquee({ items }: { items: PaintingMarqueeItem[] }) {
   const router = useRouter();
   const copies = Array.from({ length: MARQUEE_COPY_COUNT }, (_, index) => index);
-  const trackStyle = {
+  const trackStyle: MarqueeTrackStyle = {
     "--paintings-marquee-shift": `-${100 / MARQUEE_COPY_COUNT}%`,
-  } satisfies MarqueeTrackStyle;
+  };
 
   return (
     <div className="paintings-marquee" aria-label="paintings">
