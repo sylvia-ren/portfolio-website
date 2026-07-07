@@ -6,16 +6,18 @@ import type { WorkRoom } from "@/lib/content/schema";
 import { EmptyRoom, Room } from "./room";
 import { WorkLabel } from "./work-label";
 import { GallerySequence } from "./gallery-sequence";
+import { WorkRoomRail } from "./work-room-rail";
 
 /*
  * the three image rooms (paintings, sketchbooks, photographs) share one
  * anatomy; the route files stay one line each and are never duplicated.
  */
 
+const railRooms: WorkRoom[] = ["paintings", "sketchbooks"];
+
 /*
- * a room is a walk past the works themselves — one at a time, each with
- * a whispered label — never a menu of titles. entering a work opens its
- * catalogue page.
+ * a room is a walk past the works themselves — paintings and sketchbooks
+ * scroll horizontally; photographs keep the vertical wall.
  */
 export function WorkRoomIndex({ room }: { room: WorkRoom }) {
   const works = getWorks(room);
@@ -24,6 +26,8 @@ export function WorkRoomIndex({ room }: { room: WorkRoom }) {
     <Room title={room}>
       {works.length === 0 ? (
         <EmptyRoom />
+      ) : railRooms.includes(room) ? (
+        <WorkRoomRail room={room} works={works} />
       ) : (
         <div className="flex flex-col items-start">
           {works.map((work, index) => {
@@ -34,23 +38,22 @@ export function WorkRoomIndex({ room }: { room: WorkRoom }) {
                 key={work.slug}
                 className="mb-[var(--space-plate)] w-[min(44rem,100%)] last:mb-0"
               >
-                <Link href={`/${room}/${work.slug}`} className="block">
-                  <div
-                    className="plate-lift plate-reveal"
-                    style={{ animationDelay: `${120 + index * 90}ms` }}
-                  >
-                    <Image
-                      src={plateSrc(work, plate.src)}
-                      alt={plate.alt}
-                      width={width}
-                      height={height}
-                      sizes="(max-width: 768px) 88vw, 704px"
-                      quality={60}
-                      priority={index === 0}
-                      fetchPriority={index === 0 ? "high" : undefined}
-                      className="h-auto w-full"
-                    />
-                  </div>
+                <Link
+                  href={`/${room}/${work.slug}`}
+                  className="plate-lift plate-reveal block"
+                  style={{ animationDelay: `${120 + index * 90}ms` }}
+                >
+                  <Image
+                    src={plateSrc(work, plate.src)}
+                    alt={plate.alt}
+                    width={width}
+                    height={height}
+                    sizes="(max-width: 768px) 88vw, 704px"
+                    quality={60}
+                    priority={index === 0}
+                    fetchPriority={index === 0 ? "high" : undefined}
+                    className="h-auto w-full"
+                  />
                 </Link>
                 <figcaption className="mt-[var(--space-label)]">
                   <Link

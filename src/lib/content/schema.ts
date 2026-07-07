@@ -31,6 +31,8 @@ export const workSchema = z.object({
   dimensions: z.string().optional(),
   /** optional wall text shown at the entrance of the work */
   note: z.string().optional(),
+  /** lower numbers hang first within a room; ties fall back to year and slug */
+  order: z.number().int().optional(),
   /** hide a work without deleting it */
   draft: z.boolean().default(false),
   plates: z.array(plateSchema).min(1, "a work needs at least one plate"),

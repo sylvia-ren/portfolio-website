@@ -60,8 +60,13 @@ export function getWorks(room: WorkRoom): Work[] {
     })
     .filter((work) => !work.draft);
 
-  /* newest first; folder name breaks ties so ordering is deliberate */
-  return works.sort((a, b) => b.year - a.year || b.slug.localeCompare(a.slug));
+  /* explicit order first, then newest year, then slug */
+  return works.sort(
+    (a, b) =>
+      (a.order ?? Number.MAX_SAFE_INTEGER) - (b.order ?? Number.MAX_SAFE_INTEGER) ||
+      b.year - a.year ||
+      a.slug.localeCompare(b.slug),
+  );
 }
 
 export function getWork(room: WorkRoom, slug: string): Work | undefined {

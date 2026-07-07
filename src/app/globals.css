@@ -117,10 +117,19 @@
   }
 
   .plate-reveal {
-    animation: reveal-in var(--duration-reveal) var(--ease-water) both;
+    animation: plate-fade-in var(--duration-reveal) var(--ease-water) both;
   }
 
-  /* a quiet lift on hover — the same ease as the water on display type */
+  @keyframes plate-fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* a quiet lift on hover — opacity-only reveal keeps transform free for this */
   .plate-lift {
     display: block;
     will-change: transform;
@@ -140,14 +149,14 @@
     }
   }
 
-  /* sketchbook — a pile of pages on the desk */
+  /* sketchbook — a pile of pages on the desk, A5 landscape */
   .sketchbook {
-    width: min(44rem, 100%);
+    width: min(52rem, 100%);
   }
 
   .sketchbook-stage {
     position: relative;
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 210 / 148;
     cursor: pointer;
     perspective: 1400px;
     user-select: none;
@@ -230,6 +239,73 @@
     letter-spacing: var(--tracking-label);
     line-height: 1.6;
     text-transform: lowercase;
+  }
+
+  /* nav — a catalogue index unfolding on hover */
+  .nav-dropdown {
+    position: relative;
+  }
+
+  .nav-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 50;
+    min-width: max(100%, 7rem);
+    margin: 0;
+    padding: var(--space-label) 0 0;
+    list-style: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4px);
+    transition:
+      opacity 220ms var(--ease-water),
+      transform 220ms var(--ease-water),
+      visibility 220ms var(--ease-water);
+  }
+
+  .nav-dropdown:hover .nav-dropdown-menu,
+  .nav-dropdown:focus-within .nav-dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .nav-dropdown-item {
+    display: block;
+    padding: var(--space-hair) 0;
+    white-space: nowrap;
+  }
+
+  /* room rail — works aligned left to right, scrolled in motion */
+  .work-rail {
+    width: 100%;
+  }
+
+  .work-rail-track {
+    display: flex;
+    gap: var(--space-block);
+    overflow-x: auto;
+    padding-bottom: var(--space-text);
+    scroll-behavior: smooth;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: var(--line) transparent;
+  }
+
+  .work-rail-track::-webkit-scrollbar {
+    height: 1px;
+  }
+
+  .work-rail-track::-webkit-scrollbar-thumb {
+    background: var(--line);
+  }
+
+  .work-rail-item {
+    flex: 0 0 auto;
+    width: min(22rem, 72vw);
+    scroll-snap-align: start;
   }
 
   .skip-link {

@@ -1,3 +1,5 @@
+import { getWorks } from "@/lib/content";
+import { navCollectionLabel, navCollectionRooms } from "@/lib/content/nav";
 import { SiteNav } from "./site-nav";
 
 /*
@@ -11,6 +13,18 @@ export function RoomShell({
   room: "paper" | "dark";
   children: React.ReactNode;
 }) {
+  const collections = navCollectionRooms.map((workRoom) => {
+    const works = getWorks(workRoom);
+    return {
+      href: `/${workRoom}`,
+      label: workRoom,
+      items: works.map((work) => ({
+        href: `/${workRoom}/${work.slug}`,
+        label: navCollectionLabel(workRoom, work),
+      })),
+    };
+  });
+
   return (
     <div
       data-room={room}
@@ -20,7 +34,7 @@ export function RoomShell({
         skip to the room
       </a>
       <header className="flex justify-end px-[var(--margin-page)] pt-[var(--space-block)]">
-        <SiteNav />
+        <SiteNav collections={collections} />
       </header>
       <main id="room" className="flex flex-1 flex-col">
         {children}

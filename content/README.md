@@ -16,17 +16,36 @@ ordering stays deliberate). inside: a `work.yaml` and the image files (`jpg`,
 
 ```
 paintings/
-  2024-traces-of-evaporation/
+  2025-le-reve/
+    work.yaml
+    01.jpg
+sketchbooks/
+  2023-carnet/
     work.yaml
     01.jpg
     02.jpg
+  2024-carnet/
+    work.yaml
+    01.jpg
 ```
+
+### adding another sketchbook
+
+1. create a folder under `content/sketchbooks/`, e.g. `2024-carnet/`
+2. add a `work.yaml` with `year: 2024` and a `plates:` list (one entry per page)
+3. drop the image files beside it (`01.jpg`, `02.jpg`, …)
+4. optional: set `order:` so carnets sort predictably in the nav (lower first)
+5. restart the dev server — `predev` mirrors images into `public/media/`
+
+the year appears in the sketchbooks hover menu; the folder slug becomes the url
+(`/sketchbooks/2024-carnet`).
 
 `work.yaml`:
 
 ```yaml
 title: Traces of Evaporation
 year: 2024
+order: 1
 medium: chinese ink on paper      # optional
 dimensions: 30 × 40 cm            # optional
 note: >                           # optional wall text at the entrance
