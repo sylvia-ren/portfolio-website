@@ -1,0 +1,25 @@
+title: Carnet
+year: 2023
+order: 1
+note: >
+  pages from a working sketchbook — pressed plants, ink allowed to go where
+  it wanted, and sentences written in the margins.
+plates:
+  - src: 01.jpg
+    alt: herbarium spread — pressed moss, lichen and fern, a row of watercolor circles, autumn leaves
+    scale: page
+    rest: breath
+  - src: 02.jpg
+    alt: sketchbook spread — colored pencil studies, pressed seed heads, earth-toned marks across both pages
+    scale: full
+    rest: silence
+  - src: 03.jpg
+    alt: watercolor whirlpool with a small figure at the center, facing a handwritten poem
+    caption: "« ses larmes me pénètrent »"
+    scale: full
+    rest: silence
+  - src: 04.jpg
+    alt: collage of newspaper and cut-out letters around painted melon halves and a slice
+    caption: "« le temps était ce jus de melon coulant entre nos doigts »"
+    scale: full
+    rest: none
