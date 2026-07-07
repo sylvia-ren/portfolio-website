@@ -2,21 +2,21 @@ title: Carnet
 year: 2024
 order: 2
 note: >
-
+  pages from a working sketchbook.
 plates:
   - src: 01.jpg
+    alt: page 1 du carnet 2024
     scale: page
     rest: breath
-
   - src: 02.jpg
+    alt: page 2 du carnet 2024
     scale: page
     rest: breath
-
   - src: 03.jpg
+    alt: page 3 du carnet 2024
     scale: page
     rest: breath
-
   - src: 04.jpg
+    alt: page 4 du carnet 2024
     scale: page
     rest: breath
-  
