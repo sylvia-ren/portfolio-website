@@ -15,6 +15,13 @@ const mediaDir = path.resolve("public/media");
 fs.rmSync(mediaDir, { recursive: true, force: true });
 
 let count = 0;
+
+const homeImage = path.join(contentDir, "home.jpg");
+if (fs.existsSync(homeImage)) {
+  fs.mkdirSync(mediaDir, { recursive: true });
+  fs.copyFileSync(homeImage, path.join(mediaDir, "home.jpg"));
+  count += 1;
+}
 for (const room of ROOMS) {
   const roomDir = path.join(contentDir, room);
   if (!fs.existsSync(roomDir)) continue;
