@@ -43,11 +43,7 @@ export default async function WritingPage({
             {writing.body}
           </p>
         ) : (
-          writing.body.split(/\n\s*\n/).map((paragraph, index) => (
-            <p key={index} className="wall-text mb-[var(--space-text)] last:mb-0">
-              {paragraph}
-            </p>
-          ))
+          <div className="wall-text whitespace-pre-line">{writing.body}</div>
         )}
       </div>
       <p className="mt-[var(--space-rest)]">

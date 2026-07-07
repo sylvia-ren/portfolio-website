@@ -429,6 +429,46 @@
     }
   }
 
+  /* home — the threshold photograph and the water above it */
+  .home-atmosphere {
+    position: relative;
+    min-height: 100dvh;
+  }
+
+  .home-atmosphere-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    pointer-events: none;
+  }
+
+  .home-atmosphere--active .home-atmosphere-backdrop {
+    visibility: hidden;
+  }
+
+  .home-atmosphere-canvas {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    display: none;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .home-atmosphere-content {
+    position: relative;
+    z-index: 2;
+    min-height: 100dvh;
+  }
+
+  .home-atmosphere--active [data-room="dark"] {
+    background: transparent;
+  }
+
   .skip-link {
     position: fixed;
     top: var(--space-text);
