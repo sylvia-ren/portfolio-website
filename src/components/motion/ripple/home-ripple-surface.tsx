@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { createRippleEngine } from "./engine";
 
 const HOME_IMAGE = "/media/home.jpg";
@@ -32,61 +32,9 @@ function drawImageCover(
   ctx.drawImage(image, offsetX, offsetY, drawWidth, drawHeight);
 }
 
-function drawElementText(ctx: CanvasRenderingContext2D, el: Element) {
-  if (!(el instanceof HTMLElement)) return;
-
-  const style = getComputedStyle(el);
-  if (style.visibility === "hidden" || style.display === "none") return;
-
-  const rect = el.getBoundingClientRect();
-  if (rect.width === 0 || rect.height === 0) return;
-
-  const fontSize = parseFloat(style.fontSize);
-  ctx.font = `${style.fontWeight} ${style.fontSize} ${style.fontFamily}`;
-  if ("letterSpacing" in ctx) {
-    ctx.letterSpacing = style.letterSpacing === "normal" ? "0px" : style.letterSpacing;
-  }
-  ctx.fillStyle = style.color;
-  ctx.textBaseline = "top";
-
-  let text = el.textContent?.trim() ?? "";
-  if (!text) return;
-  if (style.textTransform === "lowercase") text = text.toLowerCase();
-  if (style.textTransform === "uppercase") text = text.toUpperCase();
-
-  const lineHeight =
-    style.lineHeight === "normal" ? fontSize * 1.3 : parseFloat(style.lineHeight);
-
-  const words = text.split(/\s+/);
-  let line = "";
-  let y = rect.top;
-
-  const flush = (content: string) => {
-    if (!content) return;
-    let x = rect.left;
-    const lineWidth = ctx.measureText(content).width;
-    if (style.textAlign === "center") x = rect.left + (rect.width - lineWidth) / 2;
-    else if (style.textAlign === "right") x = rect.right - lineWidth;
-    ctx.fillText(content, x, y);
-    y += lineHeight;
-  };
-
-  for (const word of words) {
-    const test = line ? `${line} ${word}` : word;
-    if (ctx.measureText(test).width > rect.width && line) {
-      flush(line);
-      line = word;
-    } else {
-      line = test;
-    }
-  }
-  flush(line);
-}
-
 function HomeRippleSurface({ children }: { children: React.ReactNode }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const rootRef = useRef<HTMLDivElement>(null);
-  const [active, setActive] = useState(false);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -104,16 +52,9 @@ function HomeRippleSurface({ children }: { children: React.ReactNode }) {
     let observer: ResizeObserver | null = null;
     let cancelled = false;
     const listeners: Array<() => void> = [];
-    const sources = new Set<HTMLElement>();
 
     const retire = () => {
-      for (const el of sources) {
-        el.classList.remove("home-ripple-source");
-        el.style.color = "";
-      }
-      sources.clear();
       canvas.style.display = "none";
-      setActive(false);
       engine?.destroy();
       engine = null;
     };
@@ -137,12 +78,6 @@ function HomeRippleSurface({ children }: { children: React.ReactNode }) {
         const raster = () => {
           if (!engine) return;
 
-          for (const el of sources) {
-            el.classList.remove("home-ripple-source");
-            el.style.color = "";
-          }
-          sources.clear();
-
           const dpr = Math.min(devicePixelRatio, 2);
           const width = Math.ceil(window.innerWidth);
           const height = Math.ceil(window.innerHeight);
@@ -161,24 +96,11 @@ function HomeRippleSurface({ children }: { children: React.ReactNode }) {
           ctx.scale(dpr, dpr);
           drawImageCover(ctx, image, width, height);
 
-          const targets = root.querySelectorAll(RIPPLE_SELECTOR);
-          for (const target of targets) {
-            if (!(target instanceof HTMLElement)) continue;
-            drawElementText(ctx, target);
-            target.classList.add("home-ripple-source");
-            sources.add(target);
-          }
-
           canvas.style.width = `${width}px`;
           canvas.style.height = `${height}px`;
           engine.resize(bufferWidth, bufferHeight);
           engine.setTexture(scratch);
           canvas.style.display = "block";
-          setActive(true);
-
-          for (const el of sources) {
-            el.style.color = "transparent";
-          }
         };
 
         raster();
@@ -204,7 +126,6 @@ function HomeRippleSurface({ children }: { children: React.ReactNode }) {
         listeners.push(() => window.removeEventListener("pointermove", onMove));
 
         observer = new ResizeObserver(() => raster());
-        observer.observe(root);
         observer.observe(document.documentElement);
 
         const onLost = () => retire();
@@ -226,10 +147,7 @@ function HomeRippleSurface({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <div
-      ref={rootRef}
-      className={active ? "home-atmosphere home-atmosphere--active" : "home-atmosphere"}
-    >
+    <div ref={rootRef} className="home-atmosphere">
       <div
         aria-hidden
         className="home-atmosphere-backdrop"

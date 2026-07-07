@@ -1,4 +1,5 @@
 import { getSite } from "@/lib/content";
+import { TypographyRipple } from "@/components/motion/ripple/typography-ripple";
 
 /*
  * the threshold. not a landing page — the moment between the street
@@ -11,7 +12,7 @@ export default function Threshold() {
   return (
     <div className="flex flex-1 flex-col items-center justify-center px-[var(--margin-page)] pb-[var(--space-section)] text-center">
       <h1 className="text-display reveal-in" style={{ animationDelay: "80ms" }}>
-        {site.name}
+        <TypographyRipple>{site.name}</TypographyRipple>
       </h1>
       {site.statement ? (
         <p

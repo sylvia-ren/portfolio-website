@@ -3,6 +3,12 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { NavCollection } from "@/lib/content/nav";
+import { TypographyRipple } from "@/components/motion/ripple/typography-ripple";
+
+function NavLabel({ label, ripple }: { label: string; ripple: boolean }) {
+  if (!ripple) return label;
+  return <TypographyRipple>{label}</TypographyRipple>;
+}
 
 const staticRooms = [
   { href: "/", label: "home" },
@@ -23,6 +29,7 @@ type NavEntry =
  */
 export function SiteNav({ collections }: { collections: NavCollection[] }) {
   const pathname = usePathname();
+  const ripple = pathname === "/";
 
   const entries: NavEntry[] = [
     { kind: "link", href: "/", label: "home" },
@@ -50,7 +57,7 @@ export function SiteNav({ collections }: { collections: NavCollection[] }) {
                   aria-current={current ? "page" : undefined}
                   className="text-label quiet-link"
                 >
-                  {entry.label}
+                  <NavLabel label={entry.label} ripple={ripple} />
                 </Link>
               </li>
             );
@@ -67,7 +74,7 @@ export function SiteNav({ collections }: { collections: NavCollection[] }) {
                 aria-haspopup="true"
                 className="text-label quiet-link"
               >
-                {collection.label}
+                <NavLabel label={collection.label} ripple={ripple} />
               </Link>
               {collection.items.length > 0 ? (
                 <ul className="nav-dropdown-menu" role="menu">
@@ -81,7 +88,7 @@ export function SiteNav({ collections }: { collections: NavCollection[] }) {
                           aria-current={itemCurrent ? "page" : undefined}
                           className="nav-dropdown-item quiet-link"
                         >
-                          {item.label}
+                          <NavLabel label={item.label} ripple={ripple} />
                         </Link>
                       </li>
                     );
