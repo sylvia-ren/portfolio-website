@@ -445,10 +445,6 @@
     pointer-events: none;
   }
 
-  .home-atmosphere--active .home-atmosphere-backdrop {
-    visibility: hidden;
-  }
-
   .home-atmosphere-canvas {
     position: fixed;
     inset: 0;
@@ -465,8 +461,8 @@
     min-height: 100dvh;
   }
 
-  .home-atmosphere--active [data-room="dark"] {
-    background: transparent;
+  .home-atmosphere [data-room="dark"] {
+    background-color: transparent !important;
   }
 
   .skip-link {

@@ -37,7 +37,13 @@ export default async function WritingPage({
           {writing.year}, {writing.kind}
         </p>
       </header>
-      <div className="mt-[var(--space-plate)] max-w-[var(--measure-prose)]">
+      <div
+        className={
+          writing.kind === "poem"
+            ? "mt-[var(--space-plate)] max-w-[var(--measure-prose)]"
+            : "mt-[var(--space-block)] max-w-[var(--measure-prose)]"
+        }
+      >
         {writing.kind === "poem" ? (
           <p className="text-body whitespace-pre-line [line-height:var(--leading-poem)]">
             {writing.body}
