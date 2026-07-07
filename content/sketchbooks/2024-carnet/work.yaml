@@ -6,17 +6,17 @@ note: >
 plates:
   - src: 01.jpg
     scale: page
-    rest: none
+    rest: breath
 
   - src: 02.jpg
     scale: page
-    rest: none
+    rest: breath
 
   - src: 03.jpg
     scale: page
-    rest: none
+    rest: breath
 
   - src: 04.jpg
     scale: page
-    rest: none
+    rest: breath
   
