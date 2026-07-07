@@ -13,8 +13,12 @@ export type IndexItem = {
 export function IndexList({ items }: { items: IndexItem[] }) {
   return (
     <ul className="flex flex-col gap-[var(--space-text)]">
-      {items.map((item) => (
-        <li key={item.href}>
+      {items.map((item, index) => (
+        <li
+          key={item.href}
+          className="reveal-in"
+          style={{ animationDelay: `${120 + index * 70}ms` }}
+        >
           <Link
             href={item.href}
             className="quiet-link inline-flex items-baseline gap-[var(--space-text)]"

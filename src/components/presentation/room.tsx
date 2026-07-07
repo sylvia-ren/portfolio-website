@@ -14,10 +14,18 @@ export function Room({
 }) {
   return (
     <div className="px-[var(--margin-page)] pb-[var(--space-section)]">
-      <h1 className="text-display mt-[var(--space-section)]">
+      <h1
+        className="text-display mt-[var(--space-section)] reveal-in"
+        style={{ animationDelay: "60ms" }}
+      >
         <TypographyRipple>{title}</TypographyRipple>
       </h1>
-      <div className="mt-[var(--space-section)]">{children}</div>
+      <div
+        className="mt-[var(--space-section)] reveal-in"
+        style={{ animationDelay: "150ms" }}
+      >
+        {children}
+      </div>
     </div>
   );
 }

@@ -55,9 +55,13 @@
   --measure-prose: 34rem;
   --margin-page: clamp(1.5rem, 6vw, 5rem);
 
-  /* motion — one easing, one duration; stillness is the default state */
+  /* motion — one easing; stillness is the default state */
   --ease-water: cubic-bezier(0.22, 1, 0.36, 1);
-  --duration-dissolve: 360ms;
+  --duration-dissolve: 640ms;
+  --duration-reveal: 720ms;
+  --duration-float: 480ms;
+  --duration-page-turn: 560ms;
+  --stagger-step: 90ms;
 }
 
 [data-room="paper"] {
