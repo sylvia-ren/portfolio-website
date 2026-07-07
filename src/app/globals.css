@@ -149,20 +149,35 @@
     }
   }
 
-  /* sketchbook — a pile of pages on the desk, A5 landscape spread */
+  /* sketchbook — a pile of pages; the sheet follows each page's proportions */
   .sketchbook {
-    width: min(72rem, 100%);
+    width: 100%;
+    margin-inline: auto;
+  }
+
+  .sketchbook--portrait {
+    max-width: min(22rem, 84vw);
+  }
+
+  .sketchbook--landscape {
+    max-width: min(38rem, 92vw);
   }
 
   .sketchbook-stage {
     position: relative;
     width: 100%;
-    aspect-ratio: 210 / 148;
-    max-height: min(48vh, 28rem);
     margin-inline: auto;
     cursor: pointer;
     perspective: 1400px;
     user-select: none;
+  }
+
+  .sketchbook--portrait .sketchbook-stage {
+    max-height: min(72vh, 38rem);
+  }
+
+  .sketchbook--landscape .sketchbook-stage {
+    max-height: min(42vh, 22rem);
   }
 
   .sketchbook-sheet {
@@ -221,7 +236,11 @@
     position: relative;
     width: 100%;
     height: 100%;
-    padding: clamp(0.75rem, 2.5vw, 1.25rem);
+    padding: clamp(0.5rem, 1.4vw, 0.75rem);
+  }
+
+  .sketchbook--landscape .sketchbook-page {
+    padding: clamp(0.3rem, 0.9vw, 0.5rem);
   }
 
   .sketchbook-page img {
