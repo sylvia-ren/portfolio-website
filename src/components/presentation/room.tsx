@@ -8,10 +8,22 @@ import { TypographyRipple } from "@/components/motion/ripple/typography-ripple";
 export function Room({
   title,
   children,
+  bare = false,
 }: {
   title: string;
   children: React.ReactNode;
+  bare?: boolean;
 }) {
+  if (bare) {
+    return (
+      <div className="flex min-h-[min(52vh,36rem)] flex-col justify-center pb-[var(--space-section)]">
+        <div className="reveal-in" style={{ animationDelay: "120ms" }}>
+          {children}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="px-[var(--margin-page)] pb-[var(--space-section)]">
       <h1

@@ -2,32 +2,47 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getWork, getWorks, plateDimensions, plateSrc } from "@/lib/content";
+import { navCollectionLabel } from "@/lib/content/nav";
 import type { WorkRoom } from "@/lib/content/schema";
+import { PaintingsMarquee } from "@/components/motion/paintings-marquee";
 import { EmptyRoom, Room } from "./room";
 import { WorkLabel } from "./work-label";
 import { GallerySequence } from "./gallery-sequence";
-import { WorkRoomRail } from "./work-room-rail";
+import { SketchbookRoomIndex } from "./sketchbook-room-index";
 
 /*
  * the three image rooms (paintings, sketchbooks, photographs) share one
  * anatomy; the route files stay one line each and are never duplicated.
  */
 
-const railRooms: WorkRoom[] = ["paintings", "sketchbooks"];
-
 /*
- * a room is a walk past the works themselves — paintings and sketchbooks
- * scroll horizontally; photographs keep the vertical wall.
+ * paintings drift in continuous motion; sketchbooks list years on hover only;
+ * photographs keep the vertical wall.
  */
 export function WorkRoomIndex({ room }: { room: WorkRoom }) {
   const works = getWorks(room);
 
   return (
-    <Room title={room}>
+    <Room title={room} bare={room === "paintings"}>
       {works.length === 0 ? (
         <EmptyRoom />
-      ) : railRooms.includes(room) ? (
-        <WorkRoomRail room={room} works={works} />
+      ) : room === "paintings" ? (
+        <PaintingsMarquee
+          items={works.map((work) => {
+            const plate = work.plates[0];
+            const { width, height } = plateDimensions(work, plate.src);
+            return {
+              slug: work.slug,
+              label: navCollectionLabel("paintings", work),
+              src: plateSrc(work, plate.src),
+              alt: plate.alt,
+              width,
+              height,
+            };
+          })}
+        />
+      ) : room === "sketchbooks" ? (
+        <SketchbookRoomIndex works={works} />
       ) : (
         <div className="flex flex-col items-start">
           {works.map((work, index) => {
