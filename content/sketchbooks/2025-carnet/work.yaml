@@ -6,7 +6,6 @@ note: >
 plates:
   - src: 01.jpg
     alt: watercolor spread — a small figure at the heart of a grey-blue whirlpool, with a handwritten poem on the facing page
-    caption: "« ses larmes me pénètrent »"
     scale: full
     rest: silence
   - src: 02.jpg
@@ -21,29 +20,4 @@ plates:
     alt: an herbarium spread — pressed moss, lichen and fern above a row of watercolor circles and autumn leaves
     scale: page
     rest: breath
-  - src: 05.jpg
-    alt: colored-pencil studies of fallen leaves and a small fire, with pressed flowers and smudges of earth
-    scale: page
-    rest: breath
-  - src: 06.jpg
-    alt: collage of newspaper and cut-out letters around a painted melon, halved and sliced
-    caption: "« le temps était ce jus de melon coulant entre nos doigts »"
-    scale: full
-    rest: silence
-  - src: 07.jpg
-    alt: a chrysanthemum drawn in restless red pen lines
-    scale: intimate
-    rest: breath
-  - src: 08.jpg
-    alt: small ink studies of mushrooms, twigs and seedpods beside a blue ink bloom
-    scale: intimate
-    rest: breath
-  - src: 09.jpg
-    alt: a small gouache abstraction in mauve, green and black, titled by hand
-    caption: "« le rêve »"
-    scale: page
-    rest: silence
-  - src: 10.jpg
-    alt: three dark ink forms stacked in a tall narrow strip, like stones sinking
-    scale: intimate
-    rest: none
+  
