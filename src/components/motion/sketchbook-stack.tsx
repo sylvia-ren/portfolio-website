@@ -22,6 +22,7 @@ export function SketchbookStack({ plates }: { plates: SketchbookPlate[] }) {
   const [index, setIndex] = useState(0);
   const [turn, setTurn] = useState<"next" | "prev" | null>(null);
   const busy = useRef(false);
+  const stageRef = useRef<HTMLDivElement>(null);
   const plate = plates[index];
   const isPortrait = plate.height > plate.width;
   const aspectRatio = `${plate.width * PAPER_MARGIN} / ${plate.height * PAPER_MARGIN}`;
@@ -66,6 +67,9 @@ export function SketchbookStack({ plates }: { plates: SketchbookPlate[] }) {
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
+      const stage = stageRef.current;
+      if (!stage?.contains(document.activeElement)) return;
+
       if (event.key === "ArrowRight" || event.key === "ArrowDown") {
         event.preventDefault();
         turnPage("next");
@@ -92,10 +96,18 @@ export function SketchbookStack({ plates }: { plates: SketchbookPlate[] }) {
   return (
     <div className={`sketchbook ${isPortrait ? "sketchbook--portrait" : "sketchbook--landscape"}`}>
       <div
+        ref={stageRef}
         className="sketchbook-stage"
         style={{ aspectRatio }}
         onClick={handleClick}
+        onKeyDown={(event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            turnPage("next");
+          }
+        }}
         role="group"
+        tabIndex={0}
         aria-label={`carnet, page ${index + 1} sur ${plates.length}`}
       >
         <div className="sketchbook-sheet sketchbook-sheet--under-2" aria-hidden />
@@ -126,7 +138,7 @@ export function SketchbookStack({ plates }: { plates: SketchbookPlate[] }) {
           feuilleter
           {index < plates.length - 1 ? " · droite" : ""}
         </p>
-        <p className="text-label ink-soft">
+        <p className="text-label ink-soft" aria-live="polite" aria-atomic="true">
           {index + 1} / {plates.length}
         </p>
       </div>

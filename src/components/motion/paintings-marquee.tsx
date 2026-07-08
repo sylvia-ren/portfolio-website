@@ -2,7 +2,7 @@
 
 import type { CSSProperties } from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export type PaintingMarqueeItem = {
   slug: string;
@@ -24,7 +24,6 @@ type MarqueeTrackStyle = CSSProperties & {
  * hover pauses the drift and whispers the title; click opens the work still.
  */
 export function PaintingsMarquee({ items }: { items: PaintingMarqueeItem[] }) {
-  const router = useRouter();
   const copies = Array.from({ length: MARQUEE_COPY_COUNT }, (_, index) => index);
   const trackStyle: MarqueeTrackStyle = {
     "--paintings-marquee-shift": `-${100 / MARQUEE_COPY_COUNT}%`,
@@ -40,15 +39,14 @@ export function PaintingsMarquee({ items }: { items: PaintingMarqueeItem[] }) {
                 key={`${copyIndex}-${item.slug}`}
                 className="paintings-marquee-item"
               >
-                <button
-                  type="button"
+                <Link
+                  href={`/paintings/${item.slug}`}
                   className="paintings-marquee-frame plate-lift"
-                  onClick={() => router.push(`/paintings/${item.slug}`)}
                   aria-label={item.label}
                 >
                   <Image
                     src={item.src}
-                    alt={item.alt}
+                    alt=""
                     width={item.width}
                     height={item.height}
                     sizes="(max-width: 768px) 40vw, 240px"
@@ -57,7 +55,7 @@ export function PaintingsMarquee({ items }: { items: PaintingMarqueeItem[] }) {
                     className="paintings-marquee-image"
                   />
                   <span className="paintings-marquee-label text-title">{item.label}</span>
-                </button>
+                </Link>
               </figure>
             ))}
           </div>

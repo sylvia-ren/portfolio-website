@@ -411,7 +411,7 @@
   }
 
   .sketchbook-years-label {
-    opacity: 0;
+    opacity: 0.45;
     transition: opacity 220ms var(--ease-water);
   }
 
@@ -426,6 +426,10 @@
       flex-wrap: wrap;
       justify-content: center;
       width: 100%;
+    }
+
+    .paintings-marquee-group:not(:first-child) {
+      display: none;
     }
   }
 
