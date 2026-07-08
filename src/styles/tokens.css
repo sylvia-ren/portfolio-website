@@ -19,6 +19,9 @@
   --chalk-soft: rgb(233 230 223 / 0.62);
   --hairline-chalk: rgb(233 230 223 / 0.18);
 
+  /* material: paintings room */
+  --paintings-wall: #d5cec1;
+
   /* the room sets these; components only ever use --bg / --fg */
   --bg: var(--paper);
   --fg: var(--ink);
@@ -78,4 +81,12 @@
   --fg-soft: var(--chalk-soft);
   --line: var(--hairline-chalk);
   color-scheme: dark;
+}
+
+[data-room="paper"]:has([data-section="paintings"]) {
+  --bg: var(--paintings-wall);
+  --fg: var(--ink);
+  --fg-soft: var(--ink-soft);
+  --line: var(--hairline-ink);
+  color-scheme: light;
 }
