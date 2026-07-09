@@ -1,4 +1,4 @@
-import type { Metadata, Viewport } from "next";
+import type { Metadata } from "next";
 import { satoshi } from "@/fonts";
 import { getSite } from "@/lib/content";
 import "./globals.css";
@@ -12,10 +12,6 @@ export const metadata: Metadata = {
   },
   description: site.description,
   ...(site.url ? { metadataBase: new URL(site.url) } : {}),
-};
-
-export const viewport: Viewport = {
-  themeColor: "#666459",
 };
 
 export default function RootLayout({

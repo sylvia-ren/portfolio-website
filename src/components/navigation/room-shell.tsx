@@ -1,6 +1,7 @@
 import { getWorks } from "@/lib/content";
 import { navCollectionLabel, navCollectionRooms } from "@/lib/content/nav";
 import { SiteNav } from "./site-nav";
+import { RoomMarker } from "./room-marker";
 
 /*
  * a room provides its own light. components inside only ever see
@@ -30,6 +31,7 @@ export function RoomShell({
       data-room={room}
       className="flex min-h-dvh flex-col bg-[var(--bg)] text-[var(--fg)]"
     >
+      <RoomMarker room={room} />
       <a href="#room" className="skip-link text-label">
         skip to the room
       </a>

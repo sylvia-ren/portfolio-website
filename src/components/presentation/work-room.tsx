@@ -23,68 +23,70 @@ export function WorkRoomIndex({ room }: { room: WorkRoom }) {
   const works = getWorks(room);
 
   return (
-    <Room title={room} bare={room === "paintings"}>
-      {works.length === 0 ? (
-        <EmptyRoom />
-      ) : room === "paintings" ? (
-        <PaintingsMarquee
-          items={works.map((work) => {
-            const plate = work.plates[0];
-            const { width, height } = plateDimensions(work, plate.src);
-            return {
-              slug: work.slug,
-              label: navCollectionLabel("paintings", work),
-              src: plateSrc(work, plate.src),
-              alt: plate.alt,
-              width,
-              height,
-            };
-          })}
-        />
-      ) : room === "sketchbooks" ? (
-        <SketchbookRoomIndex works={works} />
-      ) : (
-        <div className="flex flex-col items-start">
-          {works.map((work, index) => {
-            const plate = work.plates[0];
-            const { width, height } = plateDimensions(work, plate.src);
-            return (
-              <figure
-                key={work.slug}
-                className="mb-[var(--space-plate)] w-[min(44rem,100%)] last:mb-0"
-              >
-                <Link
-                  href={`/${room}/${work.slug}`}
-                  className="plate-lift plate-reveal block"
-                  style={{ animationDelay: `${120 + index * 90}ms` }}
+    <div data-section={room} className="contents">
+      <Room title={room} bare={room === "paintings"}>
+        {works.length === 0 ? (
+          <EmptyRoom />
+        ) : room === "paintings" ? (
+          <PaintingsMarquee
+            items={works.map((work) => {
+              const plate = work.plates[0];
+              const { width, height } = plateDimensions(work, plate.src);
+              return {
+                slug: work.slug,
+                label: navCollectionLabel("paintings", work),
+                src: plateSrc(work, plate.src),
+                alt: plate.alt,
+                width,
+                height,
+              };
+            })}
+          />
+        ) : room === "sketchbooks" ? (
+          <SketchbookRoomIndex works={works} />
+        ) : (
+          <div className="flex flex-col items-start">
+            {works.map((work, index) => {
+              const plate = work.plates[0];
+              const { width, height } = plateDimensions(work, plate.src);
+              return (
+                <figure
+                  key={work.slug}
+                  className="mb-[var(--space-plate)] w-[min(44rem,100%)] last:mb-0"
                 >
-                  <Image
-                    src={plateSrc(work, plate.src)}
-                    alt={plate.alt}
-                    width={width}
-                    height={height}
-                    sizes="(max-width: 768px) 88vw, 704px"
-                    quality={60}
-                    priority={index === 0}
-                    fetchPriority={index === 0 ? "high" : undefined}
-                    className="h-auto w-full"
-                  />
-                </Link>
-                <figcaption className="mt-[var(--space-label)]">
                   <Link
                     href={`/${room}/${work.slug}`}
-                    className="quiet-link inline-flex items-baseline gap-[var(--space-text)]"
+                    className="plate-lift plate-reveal block"
+                    style={{ animationDelay: `${120 + index * 90}ms` }}
                   >
-                    <span className="text-title">{work.title}</span>
-                    <span className="text-label">({work.year})</span>
+                    <Image
+                      src={plateSrc(work, plate.src)}
+                      alt={plate.alt}
+                      width={width}
+                      height={height}
+                      sizes="(max-width: 768px) 88vw, 704px"
+                      quality={60}
+                      priority={index === 0}
+                      fetchPriority={index === 0 ? "high" : undefined}
+                      className="h-auto w-full"
+                    />
                   </Link>
-                </figcaption>
-              </figure>
-            );
-          })}
-        </div>
-      )}
-    </Room>
+                  <figcaption className="mt-[var(--space-label)]">
+                    <Link
+                      href={`/${room}/${work.slug}`}
+                      className="quiet-link inline-flex items-baseline gap-[var(--space-text)]"
+                    >
+                      <span className="text-title">{work.title}</span>
+                      <span className="text-label">({work.year})</span>
+                    </Link>
+                  </figcaption>
+                </figure>
+              );
+            })}
+          </div>
+        )}
+      </Room>
+    </div>
   );
 }
 
@@ -99,7 +101,10 @@ export function WorkCataloguePage({
   if (!work) notFound();
 
   return (
-    <article className="px-[var(--margin-page)] pb-[var(--space-section)]">
+    <article
+      data-section={room}
+      className="px-[var(--margin-page)] pb-[var(--space-section)]"
+    >
       <div
         className="mt-[var(--space-section)] mb-[var(--space-section)] reveal-in"
         style={{ animationDelay: "80ms" }}

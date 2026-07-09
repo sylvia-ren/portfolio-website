@@ -12,8 +12,8 @@
 
 @layer base {
   body {
-    background: var(--paper);
-    color: var(--ink);
+    background: var(--bg);
+    color: var(--fg);
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
   }
@@ -471,8 +471,8 @@
     left: var(--space-text);
     z-index: 100;
     padding: var(--space-label) var(--space-text);
-    background: var(--paper);
-    color: var(--ink);
+    background: var(--bg);
+    color: var(--fg);
     clip-path: inset(50%);
   }
 
