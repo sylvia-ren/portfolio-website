@@ -51,7 +51,7 @@ export function PaintingsMarquee({ items }: { items: PaintingMarqueeItem[] }) {
                     alt={item.alt}
                     width={item.width}
                     height={item.height}
-                    sizes="(max-width: 768px) 40vw, 240px"
+                    sizes="(max-width: 768px) 88vw, 70vw"
                     quality={75}
                     priority={copyIndex === 0 && itemIndex === 0}
                     className="paintings-marquee-image"
