@@ -394,30 +394,47 @@
     color: var(--fg);
   }
 
-  /* sketchbook room — years whispered on hover, no previews */
-  .sketchbook-years {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-text);
+  /* sketchbook room — the entrance shows each carnet as a visible object */
+  .sketchbook-covers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(18rem, 100%), 1fr));
+    gap: var(--space-block);
+    align-items: end;
+    max-width: min(52rem, 100%);
     list-style: none;
     margin: 0;
     padding: 0;
   }
 
-  .sketchbook-years-link {
-    display: inline-block;
-    min-width: 4rem;
-    min-height: 1.5rem;
+  .sketchbook-cover-item {
+    min-width: 0;
   }
 
-  .sketchbook-years-label {
-    opacity: 0;
-    transition: opacity 220ms var(--ease-water);
+  .sketchbook-cover-link {
+    display: grid;
+    gap: var(--space-label);
+    width: min(22rem, 100%);
   }
 
-  .sketchbook-years-link:hover .sketchbook-years-label,
-  .sketchbook-years-link:focus-visible .sketchbook-years-label {
-    opacity: 1;
+  .sketchbook-cover-frame {
+    display: block;
+    width: 100%;
+  }
+
+  .sketchbook-cover-image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .sketchbook-cover-label {
+    color: var(--fg-soft);
+    transition: color 220ms var(--ease-water);
+  }
+
+  .sketchbook-cover-link:hover .sketchbook-cover-label,
+  .sketchbook-cover-link:focus-visible .sketchbook-cover-label {
+    color: var(--fg);
   }
 
   @media (prefers-reduced-motion: reduce) {
