@@ -16,8 +16,8 @@ export function Room({
 }) {
   if (bare) {
     return (
-      <div className="flex min-h-[min(52vh,36rem)] flex-col justify-center pb-[var(--space-section)]">
-        <div className="reveal-in" style={{ animationDelay: "120ms" }}>
+      <div className="flex min-h-0 flex-1 flex-col justify-center">
+        <div className="reveal-in min-h-0 flex-1" style={{ animationDelay: "120ms" }}>
           {children}
         </div>
       </div>

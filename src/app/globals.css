@@ -311,14 +311,17 @@
 
   /* paintings — continuous drift across the wall */
   .paintings-marquee {
+    display: flex;
+    align-items: center;
     overflow: hidden;
     width: 100%;
-    padding-bottom: var(--space-section);
+    min-height: 0;
+    flex: 1;
     mask-image: linear-gradient(
       to right,
       transparent,
-      black 8%,
-      black 92%,
+      black 6%,
+      black 94%,
       transparent
     );
   }
@@ -365,9 +368,9 @@
 
   .paintings-marquee-image {
     display: block;
-    height: min(36vh, 22rem);
+    height: min(calc(100dvh - 5rem), 90vh);
     width: auto;
-    max-width: min(16rem, 36vw);
+    max-width: min(92vw, 56rem);
     object-fit: contain;
   }
 
